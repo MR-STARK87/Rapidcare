@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Snapshot - RapidCare</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">RapidCare</a>
+        <ul class="nav-links">
+          <li><a href="patient-dashboard.html">Dashboard</a></li>
+          <li><a href="my-requests.html">My Requests</a></li>
+          <li><a href="medical-reports.html">Medical Reports</a></li>
+          <li>
+            <a href="health-snapshot.html" style="color: #6558d3"
+              >Health Snapshot</a
+            >
+          </li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="index.html" class="btn btn-outline">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Health Snapshot Container -->
+    <div class="dashboard-container">
+      <div class="section-header" style="text-align: left; margin-bottom: 2rem">
+        <h1>Health Snapshot</h1>
+        <p>Your comprehensive health overview at a glance</p>
+      </div>
+
+      <!-- Quick Stats Overview -->
+      <div class="grid-3" style="margin-bottom: 3rem">
+        <div class="metric-card" style="border-left-color: #ff6b6b">
+          <div class="metric-header">
+            <div>
+              <div class="metric-value">
+                13.5<span class="metric-unit">g/dL</span>
+              </div>
+              <div class="metric-label">Hemoglobin</div>
+            </div>
+            <div
+              class="metric-icon"
+              style="
+                background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+                color: white;
+              "
+            >
+              🩸
+            </div>
+          </div>
+          <div class="metric-status status-normal">Normal Range</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-label">
+              <span>Normal: 12-16 g/dL</span>
+              <span>84%</span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                style="
+                  width: 84%;
+                  background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metric-card" style="border-left-color: #4facfe">
+          <div class="metric-header">
+            <div>
+              <div class="metric-value">
+                92<span class="metric-unit">mg/dL</span>
+              </div>
+              <div class="metric-label">Blood Sugar (Fasting)</div>
+            </div>
+            <div
+              class="metric-icon"
+              style="
+                background: linear-gradient(135deg, #4facfe, #00f2fe);
+                color: white;
+              "
+            >
+              🩺
+            </div>
+          </div>
+          <div class="metric-status status-normal">Excellent</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-label">
+              <span>Normal: 70-100 mg/dL</span>
+              <span>92%</span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                style="
+                  width: 92%;
+                  background: linear-gradient(90deg, #4facfe, #00f2fe);
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metric-card" style="border-left-color: #667eea">
+          <div class="metric-header">
+            <div>
+              <div class="metric-value">
+                2.5<span class="metric-unit">mIU/L</span>
+              </div>
+              <div class="metric-label">Thyroid (TSH)</div>
+            </div>
+            <div
+              class="metric-icon"
+              style="
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+              "
+            >
+              🦋
+            </div>
+          </div>
+          <div class="metric-status status-normal">Optimal</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-label">
+              <span>Normal: 0.4-4.0 mIU/L</span>
+              <span>58%</span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                style="
+                  width: 58%;
+                  background: linear-gradient(90deg, #667eea, #764ba2);
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Health Profile -->
+      <div
+        class="section-header"
+        style="text-align: left; margin-bottom: 1.5rem"
+      >
+        <h2 style="font-size: 1.8rem">Personal Health Profile</h2>
+        <p style="font-size: 1rem">Based on your medical profile data</p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 3rem">
+        <!-- BMI Card -->
+        <div class="card">
+          <div class="inner">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: start;
+                margin-bottom: 1rem;
+              "
+            >
+              <div>
+                <h3 style="margin: 0 0 0.5rem 0; color: var(--text-dark)">
+                  Body Mass Index (BMI)
+                </h3>
+                <div class="metric-value" style="font-size: 2.5rem">22.8</div>
+              </div>
+              <div
+                class="metric-icon"
+                style="
+                  background: linear-gradient(135deg, #1fcac5, #18b3af);
+                  color: white;
+                  width: 56px;
+                  height: 56px;
+                  font-size: 1.8rem;
+                "
+              >
+                ⚖️
+              </div>
+            </div>
+            <div
+              class="metric-status status-normal"
+              style="margin-bottom: 1rem"
+            >
+              Healthy Weight
+            </div>
+            <div
+              style="background: #f8f9fa; padding: 1rem; border-radius: 12px"
+            >
+              <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem"
+              >
+                <div>
+                  <p
+                    style="
+                      color: var(--text-light);
+                      margin: 0;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Height
+                  </p>
+                  <p
+                    style="
+                      color: var(--text-dark);
+                      margin: 0.25rem 0 0 0;
+                      font-weight: 600;
+                    "
+                  >
+                    165 cm
+                  </p>
+                </div>
+                <div>
+                  <p
+                    style="
+                      color: var(--text-light);
+                      margin: 0;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Weight
+                  </p>
+                  <p
+                    style="
+                      color: var(--text-dark);
+                      margin: 0.25rem 0 0 0;
+                      font-weight: 600;
+                    "
+                  >
+                    62 kg
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-label">
+                <span>18.5 (Underweight)</span>
+                <span>25 (Overweight)</span>
+              </div>
+              <div
+                class="progress-bar"
+                style="
+                  height: 12px;
+                  background: linear-gradient(
+                    90deg,
+                    #4facfe 0%,
+                    #1fcac5 50%,
+                    #fee140 100%
+                  );
+                "
+              >
+                <div
+                  style="
+                    position: absolute;
+                    left: 57%;
+                    top: -8px;
+                    width: 4px;
+                    height: 28px;
+                    background: var(--text-dark);
+                    border-radius: 2px;
+                  "
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vital Stats Card -->
+        <div class="card">
+          <div class="inner">
+            <h3 style="margin: 0 0 1rem 0; color: var(--text-dark)">
+              Vital Statistics
+            </h3>
+            <div style="display: grid; gap: 1rem">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 0.75rem;
+                  background: #f8f9fa;
+                  border-radius: 8px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 0.75rem">
+                  <div
+                    style="
+                      width: 36px;
+                      height: 36px;
+                      background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+                      border-radius: 8px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: white;
+                      font-size: 1.2rem;
+                    "
+                  >
+                    🩸
+                  </div>
+                  <div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-weight: 600;
+                        color: var(--text-dark);
+                      "
+                    >
+                      Blood Group
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="
+                    font-size: 1.3rem;
+                    font-weight: 700;
+                    color: var(--primary-color);
+                  "
+                >
+                  A+
+                </div>
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 0.75rem;
+                  background: #f8f9fa;
+                  border-radius: 8px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 0.75rem">
+                  <div
+                    style="
+                      width: 36px;
+                      height: 36px;
+                      background: linear-gradient(135deg, #667eea, #764ba2);
+                      border-radius: 8px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: white;
+                      font-size: 1.2rem;
+                    "
+                  >
+                    🎂
+                  </div>
+                  <div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-weight: 600;
+                        color: var(--text-dark);
+                      "
+                    >
+                      Age
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="
+                    font-size: 1.3rem;
+                    font-weight: 700;
+                    color: var(--primary-color);
+                  "
+                >
+                  32 years
+                </div>
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 0.75rem;
+                  background: #f8f9fa;
+                  border-radius: 8px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 0.75rem">
+                  <div
+                    style="
+                      width: 36px;
+                      height: 36px;
+                      background: linear-gradient(135deg, #f093fb, #f5576c);
+                      border-radius: 8px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: white;
+                      font-size: 1.2rem;
+                    "
+                  >
+                    ⚧️
+                  </div>
+                  <div>
+                    <p
+                      style="
+                        margin: 0;
+                        font-weight: 600;
+                        color: var(--text-dark);
+                      "
+                    >
+                      Gender
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="
+                    font-size: 1.3rem;
+                    font-weight: 700;
+                    color: var(--primary-color);
+                  "
+                >
+                  Female
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vitamins & Cholesterol -->
+      <div
+        class="section-header"
+        style="text-align: left; margin-bottom: 1.5rem"
+      >
+        <h2 style="font-size: 1.8rem">Vitamins & Cholesterol Levels</h2>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 3rem">
+        <div class="metric-card" style="border-left-color: #f093fb">
+          <div class="metric-header">
+            <div>
+              <div class="metric-value">
+                22<span class="metric-unit">ng/mL</span>
+              </div>
+              <div class="metric-label">Vitamin D</div>
+            </div>
+            <div
+              class="metric-icon"
+              style="
+                background: linear-gradient(135deg, #f093fb, #f5576c);
+                color: white;
+              "
+            >
+              ☀️
+            </div>
+          </div>
+          <div class="metric-status status-warning">Below Optimal</div>
+          <p
+            style="
+              font-size: 0.85rem;
+              color: var(--text-medium);
+              margin-top: 0.75rem;
+            "
+          >
+            Consider: Sunlight exposure & supplements
+          </p>
+        </div>
+
+        <div class="metric-card" style="border-left-color: #30cfd0">
+          <div class="metric-header">
+            <div>
+              <div class="metric-value">
+                485<span class="metric-unit">pg/mL</span>
+              </div>
+              <div class="metric-label">Vitamin B12</div>
+            </div>
+            <div
+              class="metric-icon"
+              style="
+                background: linear-gradient(135deg, #30cfd0, #330867);
+                color: white;
+              "
+            >
+              💊
+            </div>
+          </div>
+          <div class="metric-status status-normal">Adequate</div>
+          <p
+            style="
+              font-size: 0.85rem;
+              color: var(--text-medium);
+              margin-top: 0.75rem;
+            "
+          >
+            Excellent nerve function support
+          </p>
+        </div>
+
+        <div class="metric-card" style="border-left-color: #fa709a">
+          <div class="metric-header">
+            <div>
+              <div class="metric-value">
+                178<span class="metric-unit">mg/dL</span>
+              </div>
+              <div class="metric-label">Total Cholesterol</div>
+            </div>
+            <div
+              class="metric-icon"
+              style="
+                background: linear-gradient(135deg, #fa709a, #fee140);
+                color: white;
+              "
+            >
+              ❤️
+            </div>
+          </div>
+          <div class="metric-status status-normal">Healthy</div>
+          <p
+            style="
+              font-size: 0.85rem;
+              color: var(--text-medium);
+              margin-top: 0.75rem;
+            "
+          >
+            Low cardiovascular risk
+          </p>
+        </div>
+      </div>
+
+      <!-- Medical Conditions & Allergies -->
+      <div class="grid-2" style="margin-bottom: 3rem">
+        <div class="card">
+          <div class="inner">
+            <h3
+              style="
+                margin: 0 0 1rem 0;
+                color: var(--text-dark);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              "
+            >
+              <span style="font-size: 1.5rem">⚕️</span>
+              Current Conditions
+            </h3>
+            <div
+              style="
+                background: #fff3cd;
+                padding: 1rem;
+                border-radius: 12px;
+                border-left: 4px solid #856404;
+              "
+            >
+              <p
+                style="
+                  margin: 0;
+                  color: #856404;
+                  font-weight: 600;
+                  margin-bottom: 0.5rem;
+                "
+              >
+                Mild Asthma
+              </p>
+              <p
+                style="margin: 0; color: var(--text-medium); font-size: 0.9rem"
+              >
+                Controlled with medication. Regular monitoring recommended.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="inner">
+            <h3
+              style="
+                margin: 0 0 1rem 0;
+                color: var(--text-dark);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              "
+            >
+              <span style="font-size: 1.5rem">⚠️</span>
+              Known Allergies
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem">
+              <div
+                style="
+                  background: #f8d7da;
+                  padding: 0.75rem 1rem;
+                  border-radius: 8px;
+                  border-left: 4px solid #721c24;
+                "
+              >
+                <p style="margin: 0; color: #721c24; font-weight: 600">
+                  Penicillin
+                </p>
+              </div>
+              <div
+                style="
+                  background: #f8d7da;
+                  padding: 0.75rem 1rem;
+                  border-radius: 8px;
+                  border-left: 4px solid #721c24;
+                "
+              >
+                <p style="margin: 0; color: #721c24; font-weight: 600">
+                  Peanuts
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Recommendations -->
+      <div
+        class="card"
+        style="
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+        "
+      >
+        <h3
+          style="
+            color: white;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          "
+        >
+          <span style="font-size: 1.5rem">💡</span>
+          Personalized Health Recommendations
+        </h3>
+        <div style="display: grid; gap: 0.75rem">
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.15);
+              padding: 1rem;
+              border-radius: 12px;
+              backdrop-filter: blur(10px);
+            "
+          >
+            <strong>Vitamin D Supplementation</strong>
+            <p style="margin: 0.5rem 0 0 0; opacity: 0.95">
+              Consider taking 1000-2000 IU daily and increase sun exposure
+              (15-20 min/day)
+            </p>
+          </div>
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.15);
+              padding: 1rem;
+              border-radius: 12px;
+              backdrop-filter: blur(10px);
+            "
+          >
+            <strong>Asthma Management</strong>
+            <p style="margin: 0.5rem 0 0 0; opacity: 0.95">
+              Continue current medication. Monitor peak flow regularly. Avoid
+              triggers and allergens.
+            </p>
+          </div>
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.15);
+              padding: 1rem;
+              border-radius: 12px;
+              backdrop-filter: blur(10px);
+            "
+          >
+            <strong>Maintain Healthy Weight</strong>
+            <p style="margin: 0.5rem 0 0 0; opacity: 0.95">
+              Your BMI is in the healthy range. Continue balanced diet and
+              regular exercise.
+            </p>
+          </div>
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.15);
+              padding: 1rem;
+              border-radius: 12px;
+              backdrop-filter: blur(10px);
+            "
+          >
+            <strong>Regular Monitoring</strong>
+            <p style="margin: 0.5rem 0 0 0; opacity: 0.95">
+              Schedule blood tests every 6 months to monitor thyroid and vitamin
+              levels.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating AI Chat Button -->
+    <div
+      class="floating-ai-chat"
+      onclick="
+        alert(
+          'AI Chat feature - Please visit the Dashboard to use the full chat interface',
+        )
+      "
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+        <circle cx="9" cy="10" r="1" fill="currentColor" />
+        <circle cx="15" cy="10" r="1" fill="currentColor" />
+        <path d="M9 14s1 1 3 1 3-1 3-1" />
+      </svg>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

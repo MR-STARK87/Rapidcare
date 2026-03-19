@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Dashboard - RapidCare</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">RapidCare</a>
+        <ul class="nav-links">
+          <li>
+            <a href="patient-dashboard.html" style="color: #6558d3"
+              >Dashboard</a
+            >
+          </li>
+          <li><a href="my-requests.html">My Requests</a></li>
+          <li><a href="medical-reports.html">Medical Reports</a></li>
+          <li><a href="health-snapshot.html">Health Snapshot</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="index.html" class="btn btn-outline">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+      <h1>Welcome back, Sarah!</h1>
+      <p style="color: #666; margin-bottom: 2rem">
+        Here's your health dashboard
+      </p>
+
+      <!-- Emergency Request Card -->
+      <div
+        class="card"
+        style="
+          background: linear-gradient(135deg, #ff4757 0%, #e63946 100%);
+          color: white;
+          margin-bottom: 2rem;
+        "
+      >
+        <h2 style="color: white; margin-bottom: 1rem; font-size: 1.5rem">
+          Need Immediate Medical Assistance?
+        </h2>
+        <a href="triage.html" class="btn btn-emergency"
+          >🚨 Request Immediate Nurse</a
+        >
+      </div>
+
+      <!-- Quick Services Section -->
+      <div
+        class="section-header"
+        style="text-align: left; margin-bottom: 1.5rem"
+      >
+        <h2>Quick Services</h2>
+        <p>Select a service to get started quickly</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div
+          class="quick-service-card"
+          onclick="window.location.href = 'triage.html'"
+        >
+          <div class="card-icon">🩹</div>
+          <h3>Injury Care</h3>
+          <p>Cuts, burns, and minor injuries</p>
+        </div>
+
+        <div
+          class="quick-service-card"
+          onclick="window.location.href = 'book-test.html'"
+        >
+          <div class="card-icon">🔬</div>
+          <h3>Book Test</h3>
+          <p>Home diagnostic services</p>
+        </div>
+
+        <div
+          class="quick-service-card"
+          onclick="window.location.href = 'medical-reports.html'"
+        >
+          <div class="card-icon">📄</div>
+          <h3>Medical Reports</h3>
+          <p>View all test results</p>
+        </div>
+
+        <div
+          class="quick-service-card"
+          onclick="window.location.href = 'health-snapshot.html'"
+        >
+          <div class="card-icon">📊</div>
+          <h3>Health Snapshot</h3>
+          <p>View health overview</p>
+        </div>
+      </div>
+
+      <!-- Upcoming Appointments -->
+      <div
+        class="section-header"
+        style="text-align: left; margin-top: 3rem; margin-bottom: 1.5rem"
+      >
+        <h2>Upcoming Appointments</h2>
+      </div>
+
+      <div class="card">
+        <div class="request-header">
+          <div>
+            <h3 style="margin-bottom: 0.5rem">Post-Surgery Wound Dressing</h3>
+            <p style="color: #666; margin: 0.25rem 0">
+              <strong>Date:</strong> March 22, 2026 at 10:00 AM
+            </p>
+            <p style="color: #666; margin: 0.25rem 0">
+              <strong>Nurse:</strong> Nurse Priya Singh
+            </p>
+            <p style="color: #666; margin: 0.25rem 0">
+              <strong>Status:</strong>
+              <span class="badge badge-success">Confirmed</span>
+            </p>
+          </div>
+        </div>
+        <div style="margin-top: 1rem; display: flex; gap: 1rem">
+          <button class="btn btn-primary">View Details</button>
+          <button class="btn btn-outline">Reschedule</button>
+        </div>
+      </div>
+
+      <!-- Recent Medical Records -->
+      <div
+        class="section-header"
+        style="text-align: left; margin-top: 3rem; margin-bottom: 1.5rem"
+      >
+        <h2>Recent Medical Records</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="margin-bottom: 0.5rem">Blood Pressure Check</h3>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Date:</strong> March 15, 2026
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Nurse:</strong> Nurse Rajesh Kumar
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Reading:</strong> 120/80 mmHg
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Status:</strong>
+            <span class="badge badge-success">Normal</span>
+          </p>
+          <button class="btn btn-outline" style="margin-top: 1rem">
+            View Full Report
+          </button>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom: 0.5rem">Home Blood Test</h3>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Date:</strong> March 10, 2026
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Nurse:</strong> Nurse Anita Desai
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Tests:</strong> Complete Blood Count, Blood Sugar
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Status:</strong>
+            <span class="badge badge-info">Results Available</span>
+          </p>
+          <button class="btn btn-outline" style="margin-top: 1rem">
+            Download Report
+          </button>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom: 0.5rem">Fever & Cold Care</h3>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Date:</strong> March 5, 2026
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Nurse:</strong> Nurse Priya Singh
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Duration:</strong> 45 minutes
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Status:</strong>
+            <span class="badge badge-success">Completed</span>
+          </p>
+          <button class="btn btn-outline" style="margin-top: 1rem">
+            View Details
+          </button>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom: 0.5rem">Elderly Care Visit</h3>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Date:</strong> February 28, 2026
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Nurse:</strong> Nurse Meera Patel
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Duration:</strong> 60 minutes
+          </p>
+          <p style="color: #666; margin: 0.25rem 0">
+            <strong>Status:</strong>
+            <span class="badge badge-success">Completed</span>
+          </p>
+          <button class="btn btn-outline" style="margin-top: 1rem">
+            View Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Health Tips Section -->
+      <div class="info-box" style="margin-top: 3rem">
+        <p>
+          <strong>💡 Health Tip:</strong> Remember to take your medications as
+          prescribed and maintain your regular check-up schedule. Stay hydrated
+          and get adequate rest!
+        </p>
+      </div>
+
+      <!-- Request History Timeline -->
+      <div
+        class="section-header"
+        style="text-align: left; margin-top: 3rem; margin-bottom: 1.5rem"
+      >
+        <h2>Request History</h2>
+        <p>Your recent nursing service requests timeline</p>
+      </div>
+
+      <div class="card" style="max-width: 900px; margin: 0 auto">
+        <div class="inner">
+          <!-- Timeline Item 1 - Today -->
+          <div class="history-timeline-item">
+            <div
+              class="timeline-date-badge"
+              style="background: linear-gradient(135deg, #1fcac5, #18b3af)"
+            >
+              <div style="font-size: 0.75rem; opacity: 0.9">Today</div>
+              <div style="font-weight: 700; font-size: 1.1rem">Mar 19</div>
+            </div>
+            <div class="timeline-connector active"></div>
+            <div class="timeline-content-card">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <div>
+                  <h4 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                    🩹 Injury Care - Burn Treatment
+                  </h4>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 0.9rem;
+                      color: var(--text-medium);
+                    "
+                  >
+                    Nurse Meera Patel • 2:30 PM
+                  </p>
+                </div>
+                <span class="request-status status-in-progress"
+                  >In Progress</span
+                >
+              </div>
+              <p
+                style="
+                  font-size: 0.9rem;
+                  color: var(--text-medium);
+                  margin-bottom: 0.75rem;
+                "
+              >
+                Second-degree burn on right forearm. Nurse currently en route,
+                ETA 12 minutes.
+              </p>
+              <div style="display: flex; gap: 0.5rem">
+                <a
+                  href="tracking.html"
+                  class="btn btn-primary"
+                  style="padding: 0.5rem 1rem; font-size: 0.9rem"
+                  >Track Live</a
+                >
+                <button
+                  class="btn btn-outline"
+                  style="padding: 0.5rem 1rem; font-size: 0.9rem"
+                >
+                  Call Nurse
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 - March 15 -->
+          <div class="history-timeline-item">
+            <div
+              class="timeline-date-badge"
+              style="background: linear-gradient(135deg, #667eea, #764ba2)"
+            >
+              <div style="font-size: 0.75rem; opacity: 0.9">4 days ago</div>
+              <div style="font-weight: 700; font-size: 1.1rem">Mar 15</div>
+            </div>
+            <div class="timeline-connector completed"></div>
+            <div class="timeline-content-card completed">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <div>
+                  <h4 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                    🩺 Post-Surgery Wound Dressing
+                  </h4>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 0.9rem;
+                      color: var(--text-medium);
+                    "
+                  >
+                    Nurse Priya Singh • 10:00 AM
+                  </p>
+                </div>
+                <span class="request-status status-completed">Completed</span>
+              </div>
+              <p
+                style="
+                  font-size: 0.9rem;
+                  color: var(--text-medium);
+                  margin-bottom: 0.75rem;
+                "
+              >
+                Professional wound dressing changed. Area healing well with no
+                signs of infection.
+              </p>
+              <div
+                style="
+                  background: #d4f4dd;
+                  padding: 0.75rem;
+                  border-radius: 8px;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.85rem;
+                  "
+                >
+                  <span style="color: var(--text-medium)">Duration:</span>
+                  <span style="color: var(--text-dark); font-weight: 600"
+                    >45 minutes</span
+                  >
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.85rem;
+                    margin-top: 0.25rem;
+                  "
+                >
+                  <span style="color: var(--text-medium)">Rating:</span>
+                  <span style="color: #ffa502">⭐⭐⭐⭐⭐ 5/5</span>
+                </div>
+              </div>
+              <button
+                class="btn btn-outline"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                View Report
+              </button>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 - March 10 -->
+          <div class="history-timeline-item">
+            <div
+              class="timeline-date-badge"
+              style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f)"
+            >
+              <div style="font-size: 0.75rem; opacity: 0.9">9 days ago</div>
+              <div style="font-weight: 700; font-size: 1.1rem">Mar 10</div>
+            </div>
+            <div class="timeline-connector completed"></div>
+            <div class="timeline-content-card completed">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <div>
+                  <h4 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                    🩸 Blood Pressure Check
+                  </h4>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 0.9rem;
+                      color: var(--text-medium);
+                    "
+                  >
+                    Nurse Rajesh Kumar • 3:15 PM
+                  </p>
+                </div>
+                <span class="request-status status-completed">Completed</span>
+              </div>
+              <p
+                style="
+                  font-size: 0.9rem;
+                  color: var(--text-medium);
+                  margin-bottom: 0.75rem;
+                "
+              >
+                Routine blood pressure monitoring and vitals check-up.
+              </p>
+              <div
+                style="
+                  background: #d4f4dd;
+                  padding: 0.75rem;
+                  border-radius: 8px;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 0.5rem;
+                    font-size: 0.85rem;
+                  "
+                >
+                  <div>
+                    <span style="color: var(--text-medium); display: block"
+                      >BP</span
+                    >
+                    <span style="color: var(--text-dark); font-weight: 600"
+                      >120/80</span
+                    >
+                  </div>
+                  <div>
+                    <span style="color: var(--text-medium); display: block"
+                      >Heart Rate</span
+                    >
+                    <span style="color: var(--text-dark); font-weight: 600"
+                      >72 bpm</span
+                    >
+                  </div>
+                  <div>
+                    <span style="color: var(--text-medium); display: block"
+                      >Status</span
+                    >
+                    <span style="color: #1a7431; font-weight: 600">Normal</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btn btn-outline"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                View Report
+              </button>
+            </div>
+          </div>
+
+          <!-- Timeline Item 4 - March 5 -->
+          <div class="history-timeline-item">
+            <div
+              class="timeline-date-badge"
+              style="background: linear-gradient(135deg, #4facfe, #00f2fe)"
+            >
+              <div style="font-size: 0.75rem; opacity: 0.9">14 days ago</div>
+              <div style="font-weight: 700; font-size: 1.1rem">Mar 5</div>
+            </div>
+            <div class="timeline-connector completed"></div>
+            <div class="timeline-content-card completed">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <div>
+                  <h4 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                    🤧 Fever & Cold Care
+                  </h4>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 0.9rem;
+                      color: var(--text-medium);
+                    "
+                  >
+                    Nurse Priya Singh • 11:30 AM
+                  </p>
+                </div>
+                <span class="request-status status-completed">Completed</span>
+              </div>
+              <p
+                style="
+                  font-size: 0.9rem;
+                  color: var(--text-medium);
+                  margin-bottom: 0.75rem;
+                "
+              >
+                General care for fever and cold symptoms. Temperature monitoring
+                and advice.
+              </p>
+              <div
+                style="
+                  background: #d4f4dd;
+                  padding: 0.75rem;
+                  border-radius: 8px;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.85rem;
+                  "
+                >
+                  <span style="color: var(--text-medium)">Duration:</span>
+                  <span style="color: var(--text-dark); font-weight: 600"
+                    >45 minutes</span
+                  >
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.85rem;
+                    margin-top: 0.25rem;
+                  "
+                >
+                  <span style="color: var(--text-medium)">Rating:</span>
+                  <span style="color: #ffa502">⭐⭐⭐⭐⭐ 5/5</span>
+                </div>
+              </div>
+              <button
+                class="btn btn-outline"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 1.5rem">
+            <a href="my-requests.html" class="btn btn-primary"
+              >View All Requests</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating AI Chat Button -->
+    <div class="floating-ai-chat" onclick="openAIChat()">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+        <circle cx="9" cy="10" r="1" fill="currentColor" />
+        <circle cx="15" cy="10" r="1" fill="currentColor" />
+        <path d="M9 14s1 1 3 1 3-1 3-1" />
+      </svg>
+    </div>
+
+    <!-- AI Chat Window -->
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <h3>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            />
+          </svg>
+          AI Health Assistant
+        </h3>
+        <button class="chat-close" onclick="closeAIChat()">×</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-message">
+          <div class="message-avatar bot">🤖</div>
+          <div>
+            <div class="message-bubble">
+              <p style="margin: 0">
+                Hello Sarah! I'm your AI health assistant. How can I help you
+                today?
+              </p>
+            </div>
+            <div class="message-time">Just now</div>
+          </div>
+        </div>
+        <div class="chat-suggestions">
+          <button
+            class="suggestion-btn"
+            onclick="sendQuickMessage('Book a diagnostic test')"
+          >
+            📊 Book Test
+          </button>
+          <button
+            class="suggestion-btn"
+            onclick="sendQuickMessage('Find a nurse nearby')"
+          >
+            👩‍⚕️ Find Nurse
+          </button>
+          <button
+            class="suggestion-btn"
+            onclick="sendQuickMessage('View my reports')"
+          >
+            📄 My Reports
+          </button>
+          <button
+            class="suggestion-btn"
+            onclick="sendQuickMessage('Health tips')"
+          >
+            💡 Health Tips
+          </button>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <div class="chat-input-wrapper">
+          <input
+            type="text"
+            class="chat-input"
+            id="chatInput"
+            placeholder="Type your message..."
+            onkeypress="handleChatKeypress(event)"
+          />
+          <button class="chat-send-btn" onclick="sendChatMessage()">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      function openAIChat() {
+        document.getElementById("chatWindow").classList.add("active");
+      }
+
+      function closeAIChat() {
+        document.getElementById("chatWindow").classList.remove("active");
+      }
+
+      function sendChatMessage() {
+        const input = document.getElementById("chatInput");
+        const message = input.value.trim();
+        if (!message) return;
+
+        addUserMessage(message);
+        input.value = "";
+
+        setTimeout(() => {
+          showTypingIndicator();
+          setTimeout(() => {
+            hideTypingIndicator();
+            addBotResponse(message);
+          }, 1500);
+        }, 500);
+      }
+
+      function sendQuickMessage(message) {
+        addUserMessage(message);
+        setTimeout(() => {
+          showTypingIndicator();
+          setTimeout(() => {
+            hideTypingIndicator();
+            addBotResponse(message);
+          }, 1500);
+        }, 500);
+      }
+
+      function handleChatKeypress(event) {
+        if (event.key === "Enter") {
+          sendChatMessage();
+        }
+      }
+
+      function addUserMessage(text) {
+        const messagesDiv = document.getElementById("chatMessages");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "chat-message user";
+        messageDiv.innerHTML = `
+                <div class="message-avatar user">👤</div>
+                <div>
+                    <div class="message-bubble">
+                        <p style="margin: 0;">${text}</p>
+                    </div>
+                    <div class="message-time">${getCurrentTime()}</div>
+                </div>
+            `;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+
+      function addBotResponse(userMessage) {
+        const responses = {
+          "Book a diagnostic test":
+            "I can help you book a diagnostic test! We offer CBC, Thyroid Profile, Lipid Profile, and many more tests with home collection. Would you like me to show you available tests?",
+          "Find a nurse nearby":
+            "Let me find certified nurses near you. Based on your location, I found 8 nurses available within 2km. Would you like to see their profiles?",
+          "View my reports":
+            "You have 3 recent test reports available. Your latest CBC report from March 15 shows all parameters normal. Would you like to see the detailed report?",
+          "Health tips":
+            "Based on your profile, here are personalized health tips:\n\n• Maintain your asthma medication schedule\n• Stay hydrated - aim for 8 glasses daily\n• Regular exercise 30 min/day\n• Monitor your vitamin D levels",
+          default:
+            "I understand you're asking about: \"" +
+            userMessage +
+            '". I can help you with booking tests, finding nurses, viewing reports, or general health questions. What would you like to know more about?',
+        };
+
+        const messagesDiv = document.getElementById("chatMessages");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "chat-message";
+        const response = responses[userMessage] || responses["default"];
+
+        messageDiv.innerHTML = `
+                <div class="message-avatar bot">🤖</div>
+                <div>
+                    <div class="message-bubble">
+                        <p style="margin: 0; white-space: pre-line;">${response}</p>
+                    </div>
+                    <div class="message-time">${getCurrentTime()}</div>
+                </div>
+            `;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+
+      function showTypingIndicator() {
+        const messagesDiv = document.getElementById("chatMessages");
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "chat-message";
+        typingDiv.id = "typingIndicator";
+        typingDiv.innerHTML = `
+                <div class="message-avatar bot">🤖</div>
+                <div>
+                    <div class="message-bubble">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        messagesDiv.appendChild(typingDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+
+      function hideTypingIndicator() {
+        const typingDiv = document.getElementById("typingIndicator");
+        if (typingDiv) typingDiv.remove();
+      }
+
+      function getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Diagnostic Test - RapidCare</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">RapidCare</a>
+            <ul class="nav-links">
+                <li><a href="patient-dashboard.html">Dashboard</a></li>
+                <li><a href="my-requests.html">My Requests</a></li>
+                <li><a href="profile.html">Medical Profile</a></li>
+                <li><a href="index.html" class="btn btn-outline">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Book Test Container -->
+    <div class="dashboard-container">
+        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+            <h1>Book Diagnostic Tests</h1>
+            <p>Home sample collection available • Reports within 24-48 hours</p>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                <input type="text" id="searchTests" class="form-control" placeholder="🔍 Search for tests..." style="flex: 1; min-width: 250px;" oninput="filterTests()">
+                <select class="form-control" style="width: 200px;" onchange="filterByCategory(this.value)">
+                    <option value="all">All Categories</option>
+                    <option value="blood">Blood Tests</option>
+                    <option value="diabetes">Diabetes & Metabolism</option>
+                    <option value="thyroid">Thyroid</option>
+                    <option value="liver">Liver & Kidney</option>
+                    <option value="heart">Heart Health</option>
+                    <option value="vitamin">Vitamins & Minerals</option>
+                    <option value="women">Women's Health</option>
+                    <option value="package">Health Packages</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Popular Tests -->
+        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.8rem;">Popular Tests</h2>
+            <p style="font-size: 1rem;">Most commonly booked diagnostic tests</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 3rem;">
+            <div class="card test-card" data-category="blood" data-name="Complete Blood Count">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Complete Blood Count (CBC)</h3>
+                        <span class="distance-badge">₹399</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Measures red & white blood cells, hemoglobin, and platelets. Essential for detecting anemia, infections, and blood disorders.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 12 Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('CBC', 399)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="diabetes" data-name="HbA1c Glycated Hemoglobin">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">HbA1c (Glycated Hemoglobin)</h3>
+                        <span class="distance-badge">₹499</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Measures average blood sugar levels over 2-3 months. Key test for diabetes monitoring and management.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 1 Parameter</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('HbA1c', 499)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="thyroid" data-name="Thyroid Profile">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Thyroid Profile (T3, T4, TSH)</h3>
+                        <span class="distance-badge">₹549</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Complete thyroid function test including T3, T4, and TSH levels. Detects thyroid disorders and hormone imbalances.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 3 Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Thyroid Profile', 549)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Tests by Category -->
+        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.8rem;">All Diagnostic Tests</h2>
+        </div>
+
+        <div id="allTestsContainer" class="grid-3">
+            <!-- Blood Tests -->
+            <div class="card test-card" data-category="blood" data-name="Lipid Profile">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Lipid Profile</h3>
+                        <span class="distance-badge">₹599</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Cholesterol and triglyceride levels. Assesses risk of heart disease and stroke.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 8 Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Lipid Profile', 599)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="liver" data-name="Liver Function Test">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Liver Function Test (LFT)</h3>
+                        <span class="distance-badge">₹649</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Evaluates liver health through enzymes and proteins. Detects liver damage or disease.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 11 Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('LFT', 649)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="liver" data-name="Kidney Function Test">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Kidney Function Test (KFT)</h3>
+                        <span class="distance-badge">₹599</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Measures kidney efficiency through creatinine, urea, and electrolytes.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 9 Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('KFT', 599)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="diabetes" data-name="Fasting Blood Sugar">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Fasting Blood Sugar (FBS)</h3>
+                        <span class="distance-badge">₹149</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Measures blood glucose after 8-12 hours fasting. Screens for diabetes and prediabetes.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 1 Parameter</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('FBS', 149)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="vitamin" data-name="Vitamin D">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Vitamin D (25-OH)</h3>
+                        <span class="distance-badge">₹899</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Measures vitamin D levels. Essential for bone health and immune function.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 1 Parameter</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Vitamin D', 899)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="vitamin" data-name="Vitamin B12">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Vitamin B12</h3>
+                        <span class="distance-badge">₹799</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Checks B12 levels. Important for nerve function and red blood cell production.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 1 Parameter</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Vitamin B12', 799)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="heart" data-name="Cardiac Risk Markers">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Cardiac Risk Markers</h3>
+                        <span class="distance-badge">₹1,299</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Comprehensive heart health assessment including Troponin, CK-MB, and BNP.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 5 Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Cardiac Risk Markers', 1299)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="women" data-name="Iron Studies">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">Iron Studies</h3>
+                        <span class="distance-badge">₹849</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Complete iron profile including serum iron, TIBC, and ferritin. Diagnoses anemia.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 4 Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Iron Studies', 849)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="blood" data-name="ESR">
+                <div class="inner">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">ESR (Erythrocyte Sedimentation Rate)</h3>
+                        <span class="distance-badge">₹199</span>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Detects inflammation in the body. Used to monitor inflammatory conditions.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge badge-info" style="margin-right: 0.5rem;">📊 1 Parameter</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('ESR', 199)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Health Packages -->
+            <div class="card test-card" data-category="package" data-name="Basic Health Checkup">
+                <div class="inner" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">🎁 Basic Health Checkup</h3>
+                        <div>
+                            <span style="text-decoration: line-through; color: var(--text-light); font-size: 0.9rem;">₹2,499</span>
+                            <span class="distance-badge" style="background: var(--secondary-color); color: white;">₹1,499</span>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        CBC, Lipid Profile, Blood Sugar, Thyroid, Liver & Kidney Function Tests
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge" style="background: #d4f4dd; color: #1a7431; margin-right: 0.5rem;">📊 45+ Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Basic Health Checkup', 1499)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="package" data-name="Comprehensive Health Package">
+                <div class="inner" style="background: linear-gradient(135deg, #fff4e6 0%, #ffe8cc 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">🎁 Comprehensive Health Package</h3>
+                        <div>
+                            <span style="text-decoration: line-through; color: var(--text-light); font-size: 0.9rem;">₹4,999</span>
+                            <span class="distance-badge" style="background: var(--secondary-color); color: white;">₹2,999</span>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        Complete body checkup with CBC, Diabetes, Thyroid, Heart, Liver, Kidney, Vitamins D & B12
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge" style="background: #d4f4dd; color: #1a7431; margin-right: 0.5rem;">📊 75+ Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart('Comprehensive Health Package', 2999)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card test-card" data-category="package" data-name="Women's Health Package">
+                <div class="inner" style="background: linear-gradient(135deg, #ffe8f5 0%, #ffd6eb 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">🎁 Women's Health Package</h3>
+                        <div>
+                            <span style="text-decoration: line-through; color: var(--text-light); font-size: 0.9rem;">₹3,499</span>
+                            <span class="distance-badge" style="background: var(--secondary-color); color: white;">₹2,199</span>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-medium); margin-bottom: 1rem; font-size: 0.95rem;">
+                        CBC, Thyroid, Iron Studies, Vitamin D & B12, Hormonal Profile, Bone Health
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="badge" style="background: #d4f4dd; color: #1a7431; margin-right: 0.5rem;">📊 60+ Parameters</span>
+                        <span class="badge badge-success">🏠 Home Collection</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addToCart("Women's Health Package", 2199)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div id="cartButton" class="floating-cart" onclick="viewCart()" style="display: none;">
+        <span id="cartCount" class="cart-count">0</span>
+        🛒
+    </div>
+
+    <!-- Floating AI Chat Button -->
+    <div class="floating-ai-chat" onclick="openAIChat()">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <circle cx="9" cy="10" r="1" fill="currentColor"/>
+            <circle cx="15" cy="10" r="1" fill="currentColor"/>
+            <path d="M9 14s1 1 3 1 3-1 3-1"/>
+        </svg>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let cart = [];
+
+        function addToCart(testName, price) {
+            cart.push({ name: testName, price: price });
+            updateCartButton();
+            showNotification(`✅ ${testName} added to cart!`);
+        }
+
+        function updateCartButton() {
+            const cartButton = document.getElementById('cartButton');
+            const cartCount = document.getElementById('cartCount');
+
+            if (cart.length > 0) {
+                cartButton.style.display = 'flex';
+                cartCount.textContent = cart.length;
+            } else {
+                cartButton.style.display = 'none';
+            }
+        }
+
+        function viewCart() {
+            if (cart.length === 0) return;
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const cartItems = cart.map(item => `• ${item.name} - ₹${item.price}`).join('\n');
+
+            alert(`🛒 Your Cart\n\n${cartItems}\n\n💰 Total: ₹${total}\n\nProceed to checkout?`);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--secondary-color);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function filterTests() {
+            const searchTerm = document.getElementById('searchTests').value.toLowerCase();
+            const testCards = document.querySelectorAll('.test-card');
+
+            testCards.forEach(card => {
+                const testName = card.dataset.name.toLowerCase();
+                if (testName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByCategory(category) {
+            const testCards = document.querySelectorAll('.test-card');
+
+            testCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openAIChat() {
+            alert('🤖 AI Health Assistant\n\n"Hello! I\'m your AI health assistant. How can I help you today?\n\n• Book diagnostic tests\n• Understand test results\n• Get health recommendations\n• Find nearby nurses\n• Answer medical questions"\n\n(AI Chat feature coming soon!)');
+        }
+    </script>
+</body>
+</html>

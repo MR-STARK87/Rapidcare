@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Triage Assessment - RapidCare</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">RapidCare</a>
+        <ul class="nav-links">
+          <li><a href="patient-dashboard.html">Dashboard</a></li>
+          <li><a href="index.html" class="btn btn-outline">Cancel</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Triage Container -->
+    <div class="dashboard-container">
+      <div class="section-header" style="text-align: center">
+        <h1>🤖 AI Medical Triage</h1>
+        <p>Help us understand your situation to provide the best care</p>
+      </div>
+
+      <div class="card" style="max-width: 800px; margin: 2rem auto">
+        <form id="triageForm">
+          <!-- Question 1: Medical Issue -->
+          <div class="form-group">
+            <label style="font-size: 1.2rem; margin-bottom: 1rem">
+              Question 1: What is the medical issue?
+            </label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="injury"
+                  name="issue"
+                  value="injury"
+                  required
+                />
+                <label for="injury">🩹 Injury</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="burn" name="issue" value="burn" />
+                <label for="burn">🔥 Burn</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="fever" name="issue" value="fever" />
+                <label for="fever">🌡️ Fever</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="elderly" name="issue" value="elderly" />
+                <label for="elderly">👵 Elderly Assistance</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="injection"
+                  name="issue"
+                  value="injection"
+                />
+                <label for="injection">💉 Injection Needed</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 2: Bleeding -->
+          <div class="form-group">
+            <label style="font-size: 1.2rem; margin-bottom: 1rem">
+              Question 2: Is there any bleeding?
+            </label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="bleeding-yes"
+                  name="bleeding"
+                  value="yes"
+                  required
+                />
+                <label for="bleeding-yes">Yes</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="bleeding-no"
+                  name="bleeding"
+                  value="no"
+                />
+                <label for="bleeding-no">No</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 3: Pain Level -->
+          <div class="form-group">
+            <label style="font-size: 1.2rem; margin-bottom: 1rem">
+              Question 3: Pain level? (1 = Mild, 5 = Severe)
+            </label>
+            <div class="range-slider">
+              <input
+                type="range"
+                id="painLevel"
+                name="painLevel"
+                min="1"
+                max="5"
+                value="3"
+                oninput="updatePainValue(this.value)"
+              />
+              <div class="range-value" id="painValue">3 / 5</div>
+            </div>
+          </div>
+
+          <!-- Additional Details -->
+          <div class="form-group">
+            <label style="font-size: 1.2rem">
+              Additional Details (Optional)
+            </label>
+            <textarea
+              class="form-control"
+              name="details"
+              placeholder="Please describe your symptoms or situation in more detail..."
+            ></textarea>
+          </div>
+
+          <!-- Location -->
+          <div class="form-group">
+            <label style="font-size: 1.2rem"> Your Location </label>
+            <input
+              type="text"
+              class="form-control"
+              name="location"
+              placeholder="Enter your address"
+              required
+            />
+          </div>
+
+          <!-- Info Box -->
+          <div class="info-box">
+            <p>
+              <strong>🔒 Privacy Note:</strong> Your information is encrypted
+              and shared only with the assigned nurse. We comply with all
+              healthcare privacy regulations.
+            </p>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-large"
+            style="width: 100%; margin-top: 1.5rem"
+          >
+            Analyze & Find Nurse
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <h2>Analyzing Your Request...</h2>
+        <p>AI is evaluating urgency and finding the nearest qualified nurse</p>
+      </div>
+    </div>
+
+    <!-- Floating AI Chat Button -->
+    <div class="floating-ai-chat" onclick="openAIChat()">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+        <circle cx="9" cy="10" r="1" fill="currentColor" />
+        <circle cx="15" cy="10" r="1" fill="currentColor" />
+        <path d="M9 14s1 1 3 1 3-1 3-1" />
+      </svg>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Update pain level value display
+      function updatePainValue(value) {
+        document.getElementById("painValue").textContent = value + " / 5";
+      }
+
+      // Handle form submission
+      document
+        .getElementById("triageForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Show loading overlay
+          document.getElementById("loadingOverlay").classList.add("active");
+
+          // Simulate AI processing for 3 seconds
+          setTimeout(function () {
+            // Redirect to tracking page
+            window.location.href = "tracking.html";
+          }, 3000);
+        });
+
+      function openAIChat() {
+        alert(
+          '🤖 AI Health Assistant\n\n"Hello! I\'m your AI health assistant. How can I help you today?\n\n• Book diagnostic tests\n• Understand test results\n• Get health recommendations\n• Find nearby nurses\n• Answer medical questions"\n\n(AI Chat feature coming soon!)',
+        );
+      }
+    </script>
+  </body>
+</html>

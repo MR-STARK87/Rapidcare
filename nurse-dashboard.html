@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nurse Dashboard - RapidCare</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo"
+          >RapidCare
+          <span style="font-size: 0.8rem; color: #3bcf8e">Nurse Portal</span></a
+        >
+        <ul class="nav-links">
+          <li>
+            <a href="nurse-dashboard.html" style="color: #2a7fff">Dashboard</a>
+          </li>
+          <li>
+            <div class="toggle-switch">
+              <span id="statusText" style="font-weight: 600; color: #3bcf8e"
+                >Online</span
+              >
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  id="availabilityToggle"
+                  checked
+                  onchange="toggleAvailability()"
+                />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </li>
+          <li><a href="index.html" class="btn btn-outline">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+      <h1>Welcome, Nurse Priya! 👩‍⚕️</h1>
+      <p style="color: #666; margin-bottom: 2rem">
+        You are currently
+        <span id="availabilityStatus" style="color: #3bcf8e; font-weight: 600"
+          >online</span
+        >
+        and available for requests
+      </p>
+
+      <!-- Stats Cards -->
+      <div class="grid-3" style="margin-bottom: 3rem">
+        <div
+          class="card"
+          style="
+            background: linear-gradient(135deg, #2a7fff 0%, #1e6de6 100%);
+            color: white;
+          "
+        >
+          <h3 style="color: white; font-size: 2.5rem; margin-bottom: 0.5rem">
+            24
+          </h3>
+          <p style="opacity: 0.95">Visits This Week</p>
+        </div>
+        <div
+          class="card"
+          style="
+            background: linear-gradient(135deg, #3bcf8e 0%, #2bb87a 100%);
+            color: white;
+          "
+        >
+          <h3 style="color: white; font-size: 2.5rem; margin-bottom: 0.5rem">
+            4.8 ⭐
+          </h3>
+          <p style="opacity: 0.95">Average Rating</p>
+        </div>
+        <div
+          class="card"
+          style="
+            background: linear-gradient(135deg, #ffa502 0%, #ff7f00 100%);
+            color: white;
+          "
+        >
+          <h3 style="color: white; font-size: 2.5rem; margin-bottom: 0.5rem">
+            ₹18,500
+          </h3>
+          <p style="opacity: 0.95">Earnings This Week</p>
+        </div>
+      </div>
+
+      <!-- Available Requests Section -->
+      <div
+        class="section-header"
+        style="text-align: left; margin-bottom: 1.5rem"
+      >
+        <h2>Available Requests Near You</h2>
+        <p>New patient requests in your area</p>
+      </div>
+
+      <div id="requestsList">
+        <!-- Request Card 1 -->
+        <div class="request-card">
+          <div class="request-header">
+            <div class="request-info">
+              <h3 style="margin-bottom: 0.5rem">Ahmed Khan</h3>
+              <p><strong>Issue:</strong> Burn Injury</p>
+              <p>
+                <strong>Urgency:</strong>
+                <span class="badge badge-warning">Medium</span>
+              </p>
+              <p><strong>Location:</strong> Sector 18, Noida</p>
+            </div>
+            <div class="distance-badge">2.3 km</div>
+          </div>
+          <div class="request-actions">
+            <button class="btn btn-primary" onclick="viewPatientInfo(1)">
+              View Patient Info
+            </button>
+            <button
+              class="btn btn-secondary"
+              onclick="acceptRequest('Ahmed Khan', 'Burn Injury')"
+            >
+              Accept Request
+            </button>
+          </div>
+        </div>
+
+        <!-- Request Card 2 -->
+        <div class="request-card">
+          <div class="request-header">
+            <div class="request-info">
+              <h3 style="margin-bottom: 0.5rem">Ramesh Gupta</h3>
+              <p><strong>Issue:</strong> Elderly Care Assistance</p>
+              <p>
+                <strong>Urgency:</strong>
+                <span class="badge badge-info">Low</span>
+              </p>
+              <p><strong>Location:</strong> Vasant Kunj, Delhi</p>
+            </div>
+            <div class="distance-badge">3.8 km</div>
+          </div>
+          <div class="request-actions">
+            <button class="btn btn-primary" onclick="viewPatientInfo(2)">
+              View Patient Info
+            </button>
+            <button
+              class="btn btn-secondary"
+              onclick="acceptRequest('Ramesh Gupta', 'Elderly Care')"
+            >
+              Accept Request
+            </button>
+          </div>
+        </div>
+
+        <!-- Request Card 3 -->
+        <div class="request-card">
+          <div class="request-header">
+            <div class="request-info">
+              <h3 style="margin-bottom: 0.5rem">Anjali Sharma</h3>
+              <p><strong>Issue:</strong> Post-Surgery Wound Dressing</p>
+              <p>
+                <strong>Urgency:</strong>
+                <span class="badge badge-success">Scheduled</span>
+              </p>
+              <p><strong>Location:</strong> Dwarka, Delhi</p>
+            </div>
+            <div class="distance-badge">1.5 km</div>
+          </div>
+          <div class="request-actions">
+            <button class="btn btn-primary" onclick="viewPatientInfo(3)">
+              View Patient Info
+            </button>
+            <button
+              class="btn btn-secondary"
+              onclick="acceptRequest('Anjali Sharma', 'Wound Dressing')"
+            >
+              Accept Request
+            </button>
+          </div>
+        </div>
+
+        <!-- Request Card 4 -->
+        <div class="request-card">
+          <div class="request-header">
+            <div class="request-info">
+              <h3 style="margin-bottom: 0.5rem">Vikram Mehta</h3>
+              <p><strong>Issue:</strong> IV Injection Required</p>
+              <p>
+                <strong>Urgency:</strong>
+                <span class="badge badge-warning">Medium</span>
+              </p>
+              <p><strong>Location:</strong> Saket, Delhi</p>
+            </div>
+            <div class="distance-badge">4.2 km</div>
+          </div>
+          <div class="request-actions">
+            <button class="btn btn-primary" onclick="viewPatientInfo(4)">
+              View Patient Info
+            </button>
+            <button
+              class="btn btn-secondary"
+              onclick="acceptRequest('Vikram Mehta', 'IV Injection')"
+            >
+              Accept Request
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Box -->
+      <div class="info-box" style="margin-top: 2rem">
+        <p>
+          <strong>💡 Tip:</strong> Review patient information carefully before
+          accepting a request. Make sure you have the necessary equipment and
+          expertise for the specific medical situation.
+        </p>
+      </div>
+    </div>
+
+    <!-- Past Visits Section -->
+    <div class="dashboard-container" style="margin-top: 3rem">
+      <div
+        class="section-header"
+        style="text-align: left; margin-bottom: 1.5rem"
+      >
+        <h2>Past Visits Completed</h2>
+        <p>Your successfully completed patient visits</p>
+      </div>
+
+      <div class="grid-2">
+        <!-- Visit 1 -->
+        <div class="visit-card">
+          <div class="visit-header">
+            <div class="visit-patient-info">
+              <div class="visit-avatar">SJ</div>
+              <div>
+                <h3 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                  Sarah Johnson
+                </h3>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.85rem;
+                    color: var(--text-medium);
+                  "
+                >
+                  Post-Surgery Wound Dressing
+                </p>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <div style="font-size: 0.85rem; color: var(--text-light)">
+                March 15, 2026
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-medium);
+                  font-weight: 600;
+                "
+              >
+                10:00 AM
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: #f8f9fa;
+              padding: 0.75rem;
+              border-radius: 8px;
+              margin-bottom: 0.75rem;
+            "
+          >
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-medium)">
+              <strong>Service:</strong> Professional wound dressing changed.
+              Area healing well with no signs of infection. Next dressing
+              scheduled.
+            </p>
+          </div>
+          <div class="visit-stats">
+            <div class="visit-stat">
+              <div class="visit-stat-value">45 min</div>
+              <div class="visit-stat-label">Duration</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">₹800</div>
+              <div class="visit-stat-label">Earned</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">1.2 km</div>
+              <div class="visit-stat-label">Distance</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value" style="color: #ffa502">⭐ 5.0</div>
+              <div class="visit-stat-label">Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visit 2 -->
+        <div class="visit-card">
+          <div class="visit-header">
+            <div class="visit-patient-info">
+              <div class="visit-avatar">RK</div>
+              <div>
+                <h3 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                  Rajesh Kumar
+                </h3>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.85rem;
+                    color: var(--text-medium);
+                  "
+                >
+                  Blood Pressure Check
+                </p>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <div style="font-size: 0.85rem; color: var(--text-light)">
+                March 10, 2026
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-medium);
+                  font-weight: 600;
+                "
+              >
+                3:15 PM
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: #f8f9fa;
+              padding: 0.75rem;
+              border-radius: 8px;
+              margin-bottom: 0.75rem;
+            "
+          >
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-medium)">
+              <strong>Vitals:</strong> BP 120/80, Heart Rate 72 bpm. All
+              parameters within normal range. Patient advised to continue
+              current medication.
+            </p>
+          </div>
+          <div class="visit-stats">
+            <div class="visit-stat">
+              <div class="visit-stat-value">20 min</div>
+              <div class="visit-stat-label">Duration</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">₹500</div>
+              <div class="visit-stat-label">Earned</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">0.9 km</div>
+              <div class="visit-stat-label">Distance</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value" style="color: #ffa502">⭐ 5.0</div>
+              <div class="visit-stat-label">Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visit 3 -->
+        <div class="visit-card">
+          <div class="visit-header">
+            <div class="visit-patient-info">
+              <div class="visit-avatar">AD</div>
+              <div>
+                <h3 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                  Anita Desai
+                </h3>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.85rem;
+                    color: var(--text-medium);
+                  "
+                >
+                  Home Blood Test Collection
+                </p>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <div style="font-size: 0.85rem; color: var(--text-light)">
+                March 8, 2026
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-medium);
+                  font-weight: 600;
+                "
+              >
+                9:00 AM
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: #f8f9fa;
+              padding: 0.75rem;
+              border-radius: 8px;
+              margin-bottom: 0.75rem;
+            "
+          >
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-medium)">
+              <strong>Tests:</strong> CBC, Blood Sugar, Thyroid Profile samples
+              collected. Proper handling protocols followed for lab delivery.
+            </p>
+          </div>
+          <div class="visit-stats">
+            <div class="visit-stat">
+              <div class="visit-stat-value">30 min</div>
+              <div class="visit-stat-label">Duration</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">₹600</div>
+              <div class="visit-stat-label">Earned</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">1.5 km</div>
+              <div class="visit-stat-label">Distance</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value" style="color: #ffa502">⭐ 4.8</div>
+              <div class="visit-stat-label">Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visit 4 -->
+        <div class="visit-card">
+          <div class="visit-header">
+            <div class="visit-patient-info">
+              <div class="visit-avatar">MP</div>
+              <div>
+                <h3 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                  Meena Patel
+                </h3>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.85rem;
+                    color: var(--text-medium);
+                  "
+                >
+                  Fever & Cold Care
+                </p>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <div style="font-size: 0.85rem; color: var(--text-light)">
+                March 5, 2026
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-medium);
+                  font-weight: 600;
+                "
+              >
+                11:30 AM
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: #f8f9fa;
+              padding: 0.75rem;
+              border-radius: 8px;
+              margin-bottom: 0.75rem;
+            "
+          >
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-medium)">
+              <strong>Service:</strong> Temperature monitoring (99.8°F), general
+              care for cold symptoms. Advised rest and hydration. Recovery
+              guidance provided.
+            </p>
+          </div>
+          <div class="visit-stats">
+            <div class="visit-stat">
+              <div class="visit-stat-value">45 min</div>
+              <div class="visit-stat-label">Duration</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">₹700</div>
+              <div class="visit-stat-label">Earned</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">2.1 km</div>
+              <div class="visit-stat-label">Distance</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value" style="color: #ffa502">⭐ 5.0</div>
+              <div class="visit-stat-label">Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visit 5 -->
+        <div class="visit-card">
+          <div class="visit-header">
+            <div class="visit-patient-info">
+              <div class="visit-avatar">VG</div>
+              <div>
+                <h3 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                  Varun Gupta
+                </h3>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.85rem;
+                    color: var(--text-medium);
+                  "
+                >
+                  Elderly Assistance
+                </p>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <div style="font-size: 0.85rem; color: var(--text-light)">
+                March 1, 2026
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-medium);
+                  font-weight: 600;
+                "
+              >
+                4:00 PM
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: #f8f9fa;
+              padding: 0.75rem;
+              border-radius: 8px;
+              margin-bottom: 0.75rem;
+            "
+          >
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-medium)">
+              <strong>Service:</strong> Senior care visit. Medication reminder,
+              mobility assistance, and general health monitoring. Patient
+              comfortable and stable.
+            </p>
+          </div>
+          <div class="visit-stats">
+            <div class="visit-stat">
+              <div class="visit-stat-value">60 min</div>
+              <div class="visit-stat-label">Duration</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">₹1,000</div>
+              <div class="visit-stat-label">Earned</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">1.8 km</div>
+              <div class="visit-stat-label">Distance</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value" style="color: #ffa502">⭐ 5.0</div>
+              <div class="visit-stat-label">Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visit 6 -->
+        <div class="visit-card">
+          <div class="visit-header">
+            <div class="visit-patient-info">
+              <div class="visit-avatar">DS</div>
+              <div>
+                <h3 style="margin: 0 0 0.25rem 0; color: var(--text-dark)">
+                  Deepak Sharma
+                </h3>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.85rem;
+                    color: var(--text-medium);
+                  "
+                >
+                  IV Injection Administration
+                </p>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <div style="font-size: 0.85rem; color: var(--text-light)">
+                February 28, 2026
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-medium);
+                  font-weight: 600;
+                "
+              >
+                2:30 PM
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: #f8f9fa;
+              padding: 0.75rem;
+              border-radius: 8px;
+              margin-bottom: 0.75rem;
+            "
+          >
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-medium)">
+              <strong>Service:</strong> Professional IV injection administered
+              as per prescription. Patient monitored for reactions. No adverse
+              effects observed.
+            </p>
+          </div>
+          <div class="visit-stats">
+            <div class="visit-stat">
+              <div class="visit-stat-value">35 min</div>
+              <div class="visit-stat-label">Duration</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">₹900</div>
+              <div class="visit-stat-label">Earned</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value">1.0 km</div>
+              <div class="visit-stat-label">Distance</div>
+            </div>
+            <div class="visit-stat">
+              <div class="visit-stat-value" style="color: #ffa502">⭐ 4.9</div>
+              <div class="visit-stat-label">Rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Stats -->
+      <div
+        class="card"
+        style="
+          margin-top: 2rem;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+        "
+      >
+        <h3 style="color: white; margin-bottom: 1.5rem">
+          This Month's Performance
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+          "
+        >
+          <div style="text-align: center">
+            <div
+              style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem"
+            >
+              24
+            </div>
+            <div style="font-size: 0.9rem; opacity: 0.9">Total Visits</div>
+          </div>
+          <div style="text-align: center">
+            <div
+              style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem"
+            >
+              ₹18,500
+            </div>
+            <div style="font-size: 0.9rem; opacity: 0.9">Earnings</div>
+          </div>
+          <div style="text-align: center">
+            <div
+              style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem"
+            >
+              4.8 ⭐
+            </div>
+            <div style="font-size: 0.9rem; opacity: 0.9">Avg Rating</div>
+          </div>
+          <div style="text-align: center">
+            <div
+              style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem"
+            >
+              38 min
+            </div>
+            <div style="font-size: 0.9rem; opacity: 0.9">Avg Duration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patient Info Modal -->
+    <div class="modal" id="patientModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalPatientName">Patient Information</h2>
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div id="modalContent">
+          <!-- Patient details will be populated here -->
+        </div>
+        <button
+          class="btn btn-primary btn-large"
+          style="width: 100%; margin-top: 1rem"
+          onclick="closeModal()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating AI Chat Button -->
+    <div class="floating-ai-chat" onclick="openAIChat()">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+        <circle cx="9" cy="10" r="1" fill="currentColor" />
+        <circle cx="15" cy="10" r="1" fill="currentColor" />
+        <path d="M9 14s1 1 3 1 3-1 3-1" />
+      </svg>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Patient data
+      const patientData = {
+        1: {
+          name: "Ahmed Khan",
+          age: 35,
+          bloodGroup: "B+",
+          allergies: "None reported",
+          issue: "Second-degree burn on right forearm from cooking accident",
+          medicalConditions: "No known chronic conditions",
+          medications: "None",
+          painLevel: 4,
+          bleeding: "No",
+          additionalInfo:
+            "Burn occurred 2 hours ago. Applied cold water immediately. Area is red and blistering.",
+        },
+        2: {
+          name: "Ramesh Gupta",
+          age: 72,
+          bloodGroup: "O+",
+          allergies: "Penicillin",
+          issue:
+            "Routine elderly care, medication administration, and vitals check",
+          medicalConditions: "Type 2 Diabetes, Hypertension",
+          medications: "Metformin, Amlodipine",
+          painLevel: 1,
+          bleeding: "No",
+          additionalInfo:
+            "Regular patient. Needs assistance with daily medication and blood pressure monitoring.",
+        },
+        3: {
+          name: "Anjali Sharma",
+          age: 28,
+          bloodGroup: "A+",
+          allergies: "Latex",
+          issue: "Post-appendectomy wound dressing change (Day 5 post-op)",
+          medicalConditions: "Post-surgical recovery",
+          medications: "Antibiotics (Cefixime), Pain relievers",
+          painLevel: 2,
+          bleeding: "No",
+          additionalInfo:
+            "Surgical site appears clean. Wants wound dressing changed as per doctor's instructions.",
+        },
+        4: {
+          name: "Vikram Mehta",
+          age: 45,
+          bloodGroup: "AB+",
+          allergies: "None reported",
+          issue: "IV antibiotic administration as prescribed by physician",
+          medicalConditions: "Respiratory infection",
+          medications: "IV Antibiotics (prescription provided)",
+          painLevel: 2,
+          bleeding: "No",
+          additionalInfo:
+            "Doctor has prescribed 5-day course of IV antibiotics. Patient prefers left arm for IV access.",
+        },
+      };
+
+      // Toggle availability
+      function toggleAvailability() {
+        const toggle = document.getElementById("availabilityToggle");
+        const statusText = document.getElementById("statusText");
+        const availabilityStatus =
+          document.getElementById("availabilityStatus");
+
+        if (toggle.checked) {
+          statusText.textContent = "Online";
+          statusText.style.color = "#3BCF8E";
+          availabilityStatus.textContent = "online";
+          availabilityStatus.style.color = "#3BCF8E";
+        } else {
+          statusText.textContent = "Offline";
+          statusText.style.color = "#999";
+          availabilityStatus.textContent = "offline";
+          availabilityStatus.style.color = "#999";
+        }
+      }
+
+      // View patient info
+      function viewPatientInfo(patientId) {
+        const patient = patientData[patientId];
+        const modal = document.getElementById("patientModal");
+        const modalName = document.getElementById("modalPatientName");
+        const modalContent = document.getElementById("modalContent");
+
+        modalName.textContent = patient.name + " - Medical Information";
+
+        modalContent.innerHTML = `
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div>
+                            <strong>Age:</strong> ${patient.age} years
+                        </div>
+                        <div>
+                            <strong>Blood Group:</strong> ${patient.bloodGroup}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Allergies:</strong><br>
+                        <span style="color: ${patient.allergies === "None reported" ? "#3BCF8E" : "#ff4757"};">
+                            ${patient.allergies}
+                        </span>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Medical Issue:</strong><br>
+                        <p style="color: #666; margin-top: 0.5rem;">${patient.issue}</p>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Chronic Conditions:</strong><br>
+                        <p style="color: #666; margin-top: 0.5rem;">${patient.medicalConditions}</p>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Current Medications:</strong><br>
+                        <p style="color: #666; margin-top: 0.5rem;">${patient.medications}</p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div>
+                            <strong>Pain Level:</strong> ${patient.painLevel}/5
+                        </div>
+                        <div>
+                            <strong>Bleeding:</strong> ${patient.bleeding}
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f9ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #2A7FFF;">
+                        <strong>Additional Information:</strong><br>
+                        <p style="color: #666; margin-top: 0.5rem; margin-bottom: 0;">${patient.additionalInfo}</p>
+                    </div>
+                </div>
+            `;
+
+        modal.classList.add("active");
+      }
+
+      // Close modal
+      function closeModal() {
+        document.getElementById("patientModal").classList.remove("active");
+      }
+
+      // Accept request
+      function acceptRequest(patientName, issue) {
+        if (
+          confirm(
+            `Accept request from ${patientName}?\n\nIssue: ${issue}\n\nYou will be navigated to the patient location.`,
+          )
+        ) {
+          alert(
+            `✅ Request Accepted!\n\nPatient: ${patientName}\n\nYou can now view the patient's location and start navigation. The patient has been notified of your acceptance.`,
+          );
+
+          // In a real app, this would navigate to a navigation/tracking screen
+          // For demo purposes, we'll just show a success message
+        }
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function (event) {
+        const modal = document.getElementById("patientModal");
+        if (event.target === modal) {
+          closeModal();
+        }
+      };
+
+      function openAIChat() {
+        alert(
+          '🤖 AI Health Assistant\n\n"Hello! I\'m your AI health assistant. How can I help you today?\n\n• Book diagnostic tests\n• Understand test results\n• Get health recommendations\n• Find nearby nurses\n• Answer medical questions"\n\n(AI Chat feature coming soon!)',
+        );
+      }
+    </script>
+  </body>
+</html>

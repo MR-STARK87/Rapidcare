@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidCare - Medical Help at Your Doorstep</title>
+    <style>
+        /* ===========================
+           GLOBAL RESET & BASE STYLES
+           =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2A7FFF;
+            --secondary-green: #3BCF8E;
+            --dark-text: #1A1A2E;
+            --gray-text: #5A5A6E;
+            --light-gray: #F7F8FA;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 8px rgba(42, 127, 255, 0.08);
+            --shadow-md: 0 4px 16px rgba(42, 127, 255, 0.12);
+            --shadow-lg: 0 8px 32px rgba(42, 127, 255, 0.16);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ===========================
+           ANNOUNCEMENT BAR
+           =========================== */
+        .announcement-bar {
+            background: linear-gradient(135deg, var(--primary-blue), #1E6FE6);
+            color: var(--white);
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===========================
+           HEADER / NAVBAR
+           =========================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--dark-text);
+        }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .nav-logo::before {
+            content: '+';
+            font-size: 28px;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        .nav-logo::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: var(--white);
+            bottom: 12px;
+            right: 8px;
+            transform: rotate(-45deg);
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-text);
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-primary:hover {
+            background: #1E6FE6;
+            border-color: #1E6FE6;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--dark-text);
+            cursor: pointer;
+        }
+
+        /* ===========================
+           HERO SECTION
+           =========================== */
+        .hero {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            color: var(--dark-text);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--gray-text);
+            margin-bottom: 36px;
+            max-width: 540px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .btn-large {
+            padding: 16px 36px;
+            font-size: 16px;
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-text);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .trust-badge-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 12px;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .dashboard-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .card-main {
+            width: 340px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        .card-status {
+            display: inline-block;
+            background: #E8F5E9;
+            color: var(--secondary-green);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .card-main h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .nurse-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .nurse-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .nurse-details h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .nurse-details p {
+            font-size: 13px;
+            color: var(--gray-text);
+        }
+
+        .eta-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: #E3F2FD;
+            border-radius: 8px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .card-map {
+            width: 200px;
+            height: 180px;
+            top: 10%;
+            right: 5%;
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            z-index: 1;
+            animation: float 4s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        .map-pin {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-blue);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -16px;
+            margin-top: -16px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .map-pin::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--white);
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+        }
+
+        .card-profile {
+            width: 180px;
+            padding: 16px;
+            top: 60%;
+            left: -5%;
+            z-index: 2;
+            animation: float 3.5s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .profile-item {
+            font-size: 12px;
+            color: var(--gray-text);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .profile-item strong {
+            color: var(--dark-text);
+        }
+
+        .gradient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-blue);
+            top: 0;
+            right: 0;
+        }
+
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            background: var(--secondary-green);
+            bottom: 0;
+            left: 0;
+        }
+
+        /* ===========================
+           TRUST STATS STRIP
+           =========================== */
+        .trust-stats {
+            background: var(--light-gray);
+            padding: 60px 40px;
+        }
+
+        .trust-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: var(--white);
+        }
+
+        .stat-card h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            font-size: 15px;
+            color: var(--gray-text);
+            font-weight: 500;
+        }
+
+        /* ===========================
+           SECTION COMMON STYLES
+           =========================== */
+        .section {
+            padding: 100px 40px;
+        }
+
+        .section-alt {
+            background: var(--light-gray);
+        }
+
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            color: var(--dark-text);
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray-text);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* ===========================
+           SERVICES SECTION
+           =========================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 36px 28px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 28px;
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark-text);
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        /* ===========================
+           HOW IT WORKS SECTION
+           =========================== */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            position: relative;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--dark-text);
+        }
+
+        .step-card p {
+            font-size: 16px;
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        /* ===========================
+           WHY CHOOSE US SECTION
+           =========================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            gap: 24px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(6px);
+        }
+
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark-text);
+        }
+
+        .feature-content p {
+            font-size: 15px;
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        /* ===========================
+           NURSE RECRUITMENT SECTION
+           =========================== */
+        .nurse-recruitment {
+            background: linear-gradient(135deg, var(--primary-blue), #1E6FE6);
+            color: var(--white);
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .nurse-recruitment h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .nurse-recruitment p {
+            font-size: 18px;
+            max-width: 720px;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--white);
+        }
+
+        .btn-white:hover {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        /* ===========================
+           MEDICAL RECORDS SECTION
+           =========================== */
+        .records-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .records-text h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--dark-text);
+        }
+
+        .records-text p {
+            font-size: 18px;
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .records-features {
+            display: grid;
+            gap: 16px;
+        }
+
+        .record-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .record-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+        }
+
+        .record-item span {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .records-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .record-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .record-card-1 {
+            width: 280px;
+            top: 10%;
+            left: 10%;
+            z-index: 3;
+        }
+
+        .record-card-2 {
+            width: 240px;
+            top: 45%;
+            right: 10%;
+            z-index: 2;
+        }
+
+        .record-card-3 {
+            width: 200px;
+            bottom: 10%;
+            left: 15%;
+            z-index: 1;
+        }
+
+        .record-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark-text);
+        }
+
+        .record-detail {
+            font-size: 13px;
+            color: var(--gray-text);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ===========================
+           TESTIMONIALS SECTION
+           =========================== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 36px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .stars {
+            color: #FFC107;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray-text);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--dark-text);
+        }
+
+        .author-info p {
+            font-size: 13px;
+            color: var(--gray-text);
+        }
+
+        /* ===========================
+           FINAL CTA SECTION
+           =========================== */
+        .final-cta {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .final-cta p {
+            font-size: 18px;
+            color: var(--gray-text);
+            max-width: 720px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .final-cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* ===========================
+           FOOTER
+           =========================== */
+        .footer {
+            background: var(--dark-text);
+            color: var(--light-gray);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .footer-brand p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #B0B0BE;
+            margin-bottom: 24px;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #B0B0BE;
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B0B0BE;
+            font-size: 14px;
+        }
+
+        /* ===========================
+           ANIMATIONS
+           =========================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===========================
+           RESPONSIVE DESIGN
+           =========================== */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-visual {
+                height: 500px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .hero-visual {
+                height: 400px;
+                display: none;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .trust-container {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .records-content {
+                grid-template-columns: 1fr;
+            }
+
+            .records-visual {
+                display: none;
+            }
+
+            .final-cta h2 {
+                font-size: 36px;
+            }
+
+            .final-cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        AI-powered nurse dispatch for urgent home care — Certified professionals at your doorstep
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">
+                <div class="nav-logo"></div>
+                <span class="brand-name">RapidCare</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#for-nurses">For Nurses</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="patient-dashboard.html" class="btn btn-outline">Login</a>
+                <a href="triage.html" class="btn btn-primary">Get Care Now</a>
+            </div>
+
+            <button class="mobile-menu-toggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h1>Medical Help at Your Doorstep in Minutes</h1>
+            <p>RapidCare connects patients with certified nurses for urgent, non-critical care at home — powered by intelligent triage, real-time dispatch, and trusted healthcare support.</p>
+
+            <div class="hero-cta">
+                <a href="triage.html" class="btn btn-primary btn-large">Request a Nurse</a>
+                <a href="#services" class="btn btn-secondary btn-large">Explore Services</a>
+            </div>
+
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✓</div>
+                    <span>Certified Nurses</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">🤖</div>
+                    <span>AI Triage Support</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">⚡</div>
+                    <span>Fast Home Response</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="gradient-blob blob-1"></div>
+            <div class="gradient-blob blob-2"></div>
+
+            <div class="dashboard-card card-main">
+                <span class="card-status">✓ Nurse Assigned</span>
+                <h3>Help is on the way</h3>
+
+                <div class="nurse-info">
+                    <div class="nurse-avatar">SM</div>
+                    <div class="nurse-details">
+                        <h4>Sarah Mitchell, RN</h4>
+                        <p>5 years experience • ⭐ 4.9</p>
+                    </div>
+                </div>
+
+                <div class="eta-badge">
+                    <span>⏱️</span>
+                    <span>ETA: 12 minutes</span>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-map">
+                <div class="map-pin"></div>
+            </div>
+
+            <div class="dashboard-card card-profile">
+                <div class="profile-item">
+                    <span>Blood Type</span>
+                    <strong>O+</strong>
+                </div>
+                <div class="profile-item">
+                    <span>Allergies</span>
+                    <strong>None</strong>
+                </div>
+                <div class="profile-item">
+                    <span>Age</span>
+                    <strong>42</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST STATS STRIP -->
+    <section class="trust-stats">
+        <div class="trust-container">
+            <div class="stat-card fade-in">
+                <div class="stat-icon">⚡</div>
+                <h3>15 min</h3>
+                <p>Target Response Time</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-icon">✓</div>
+                <h3>100%</h3>
+                <p>Certified Nurses</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-icon">🤖</div>
+                <h3>AI-Powered</h3>
+                <p>Smart Triage System</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-icon">🏠</div>
+                <h3>24/7</h3>
+                <p>Home Care Support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section" id="services">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Care Designed for Real-Life Urgencies</h2>
+                <p>Professional nursing support when you need it most, delivered safely to your home</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🩹</div>
+                    <h3>Injury & First Aid Care</h3>
+                    <p>Quick response for minor injuries, cuts, burns, and immediate first aid treatment at home</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">👵</div>
+                    <h3>Elderly Support at Home</h3>
+                    <p>Compassionate care for seniors including medication assistance and health monitoring</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">💉</div>
+                    <h3>Wound Dressing & Recovery Care</h3>
+                    <p>Professional wound care, dressing changes, and post-surgical recovery support</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">💊</div>
+                    <h3>Injection & IV Assistance</h3>
+                    <p>Safe administration of injections, IV therapy, and medication delivery at home</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🔬</div>
+                    <h3>Home Diagnostic Test Booking</h3>
+                    <p>Schedule blood tests, ECG, and diagnostic services in the comfort of your home</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">📋</div>
+                    <h3>Post-Hospital Follow-Up Care</h3>
+                    <p>Continued nursing support after hospital discharge for smooth recovery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section class="section section-alt" id="how-it-works">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>How RapidCare Works</h2>
+                <p>Simple, fast, and designed for urgent care situations</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Describe the Situation</h3>
+                    <p>Share your care needs through our app or call. Tell us what's happening and where you need help.</p>
+                </div>
+
+                <div class="step-card fade-in">
+                    <div class="step-number">2</div>
+                    <h3>AI Triage Checks Urgency</h3>
+                    <p>Our intelligent triage system assesses the situation and recommends the right level of care.</p>
+                </div>
+
+                <div class="step-card fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Nearest Nurse Gets Dispatched</h3>
+                    <p>A certified nurse nearby accepts your request and arrives at your location with medical context ready.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US SECTION -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Built for Speed, Safety, and Peace of Mind</h2>
+                <p>Healthcare support that understands urgency and patient context</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h3>Certified Professionals</h3>
+                        <p>Every nurse in our network is licensed, verified, and experienced in urgent home care scenarios.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🧠</div>
+                    <div class="feature-content">
+                        <h3>Smart Triage Guidance</h3>
+                        <p>AI-powered assessment helps determine urgency and guides you to the right care path every time.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-content">
+                        <h3>Faster At-Home Response</h3>
+                        <p>Skip the ER wait. Get a nurse dispatched to your location within minutes for non-critical urgent needs.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-content">
+                        <h3>Medical Context Before Arrival</h3>
+                        <p>Nurses see your allergies, blood type, and key health details before reaching you for safer, faster care.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NURSE RECRUITMENT SECTION -->
+    <section class="nurse-recruitment" id="for-nurses">
+        <div class="section-container">
+            <h2>Join the RapidCare Network</h2>
+            <p>Be part of a modern healthcare platform connecting certified nurses with patients in need. Accept off-duty requests, earn flexibly, and deliver care in your local community. Partner with us to make urgent home care faster and more accessible.</p>
+            <a href="nurse-dashboard.html" class="btn btn-white btn-large">Become a Nurse Partner</a>
+        </div>
+    </section>
+
+    <!-- MEDICAL RECORDS SECTION -->
+    <section class="section section-alt">
+        <div class="section-container">
+            <div class="records-content">
+                <div class="records-text fade-in">
+                    <h2>Your Care History, Always Within Reach</h2>
+                    <p>Store important health information, upload test reports, and maintain a complete medical profile that helps nurses deliver better care every time.</p>
+
+                    <div class="records-features">
+                        <div class="record-item">
+                            <div class="record-icon">👤</div>
+                            <span>Medical Profile Management</span>
+                        </div>
+                        <div class="record-item">
+                            <div class="record-icon">📄</div>
+                            <span>Test Reports & Lab Results</span>
+                        </div>
+                        <div class="record-item">
+                            <div class="record-icon">📝</div>
+                            <span>Visit Summaries & History</span>
+                        </div>
+                        <div class="record-item">
+                            <div class="record-icon">🩸</div>
+                            <span>Allergies & Blood Type</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="records-visual">
+                    <div class="record-card record-card-1">
+                        <h4>Medical Profile</h4>
+                        <div class="record-detail">
+                            <span>Blood Type</span>
+                            <strong>O+</strong>
+                        </div>
+                        <div class="record-detail">
+                            <span>Allergies</span>
+                            <strong>Penicillin</strong>
+                        </div>
+                        <div class="record-detail">
+                            <span>Chronic Conditions</span>
+                            <strong>None</strong>
+                        </div>
+                    </div>
+
+                    <div class="record-card record-card-2">
+                        <h4>Recent Test</h4>
+                        <div class="record-detail">
+                            <span>CBC Panel</span>
+                            <strong>Normal</strong>
+                        </div>
+                        <div class="record-detail">
+                            <span>Date</span>
+                            <strong>Mar 10, 2026</strong>
+                        </div>
+                    </div>
+
+                    <div class="record-card record-card-3">
+                        <h4>Last Visit</h4>
+                        <div class="record-detail">
+                            <span>Service</span>
+                            <strong>Wound Care</strong>
+                        </div>
+                        <div class="record-detail">
+                            <span>Nurse</span>
+                            <strong>Sarah M.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="section" id="about">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Trusted by Patients and Families</h2>
+                <p>Real experiences from people who chose RapidCare</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"My father needed wound dressing after surgery. The nurse arrived quickly, had all his medical information, and handled everything professionally. This service gave me peace of mind."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <h4>Rachel Thompson</h4>
+                            <p>Daughter, caring for elderly parent</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"I cut my hand badly on Sunday evening. Instead of waiting hours at the ER, RapidCare sent a nurse in 15 minutes. She cleaned and dressed the wound perfectly. Fast and reassuring."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Patient, minor injury care</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Booking a home blood test was so simple. The app scheduled everything, the nurse arrived on time, and I got my results uploaded to my profile. Exactly what modern healthcare should feel like."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>User, home diagnostic service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="final-cta">
+        <div class="section-container">
+            <h2>Need Care at Home Without the Hospital Rush?</h2>
+            <p>Request certified nursing support, book a home test, and access care designed for real-life urgency.</p>
+            <div class="final-cta-buttons">
+                <a href="triage.html" class="btn btn-primary btn-large">Request Care Now</a>
+                <a href="nurse-dashboard.html" class="btn btn-secondary btn-large">Become a Nurse Partner</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>RapidCare</h3>
+                    <p>Fast, intelligent, and compassionate home nursing care when you need it most. Connecting certified healthcare professionals with patients for urgent, non-critical care.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#for-nurses">For Nurses</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Injury Care</a></li>
+                        <li><a href="#services">Elderly Support</a></li>
+                        <li><a href="#services">Wound Care</a></li>
+                        <li><a href="#services">IV & Injections</a></li>
+                        <li><a href="#services">Diagnostic Tests</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Medical Disclaimer</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 RapidCare. All rights reserved. Built for speed, safety, and peace of mind.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

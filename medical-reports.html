@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Reports - RapidCare</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">RapidCare</a>
+        <ul class="nav-links">
+          <li><a href="patient-dashboard.html">Dashboard</a></li>
+          <li><a href="my-requests.html">My Requests</a></li>
+          <li>
+            <a href="medical-reports.html" style="color: #6558d3"
+              >Medical Reports</a
+            >
+          </li>
+          <li><a href="health-snapshot.html">Health Snapshot</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="index.html" class="btn btn-outline">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Medical Reports Container -->
+    <div class="dashboard-container">
+      <div class="section-header" style="text-align: left; margin-bottom: 2rem">
+        <h1>Medical Reports</h1>
+        <p>Access all your diagnostic test reports and medical documents</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="status-tabs">
+        <button class="tab active" onclick="filterReports('all')">
+          All Reports
+        </button>
+        <button class="tab" onclick="filterReports('blood')">
+          Blood Tests
+        </button>
+        <button class="tab" onclick="filterReports('diabetes')">
+          Diabetes
+        </button>
+        <button class="tab" onclick="filterReports('vitamins')">
+          Vitamins
+        </button>
+        <button class="tab" onclick="filterReports('thyroid')">Thyroid</button>
+      </div>
+
+      <!-- Reports Grid -->
+      <div class="grid-2" id="reportsContainer">
+        <!-- Recent CBC Report -->
+        <div
+          class="report-card"
+          data-category="blood"
+          onclick="viewReport('cbc-march')"
+        >
+          <div class="report-header">
+            <div
+              class="report-icon"
+              style="
+                background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+                color: white;
+              "
+            >
+              🩸
+            </div>
+            <div class="report-date">March 15, 2026</div>
+          </div>
+          <h3 class="report-title">Complete Blood Count (CBC)</h3>
+          <p style="color: var(--text-medium); margin-bottom: 1rem">
+            Comprehensive blood cell analysis including hemoglobin, WBC, RBC,
+            and platelets
+          </p>
+          <div class="metric-status status-normal">✓ All Parameters Normal</div>
+          <div class="report-details">
+            <div class="report-detail-item">
+              <div class="report-detail-label">Hemoglobin</div>
+              <div class="report-detail-value">13.5 g/dL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">WBC Count</div>
+              <div class="report-detail-value">7,200/μL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">Platelets</div>
+              <div class="report-detail-value">245,000/μL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thyroid Profile -->
+        <div
+          class="report-card"
+          data-category="thyroid"
+          onclick="viewReport('thyroid-march')"
+        >
+          <div class="report-header">
+            <div
+              class="report-icon"
+              style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+              "
+            >
+              🦋
+            </div>
+            <div class="report-date">March 10, 2026</div>
+          </div>
+          <h3 class="report-title">Thyroid Profile (T3, T4, TSH)</h3>
+          <p style="color: var(--text-medium); margin-bottom: 1rem">
+            Complete thyroid function assessment with hormone levels
+          </p>
+          <div class="metric-status status-normal">✓ Within Normal Range</div>
+          <div class="report-details">
+            <div class="report-detail-item">
+              <div class="report-detail-label">TSH</div>
+              <div class="report-detail-value">2.5 mIU/L</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">T3</div>
+              <div class="report-detail-value">1.2 ng/mL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">T4</div>
+              <div class="report-detail-value">8.5 μg/dL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vitamin D Report -->
+        <div
+          class="report-card"
+          data-category="vitamins"
+          onclick="viewReport('vitamin-d')"
+        >
+          <div class="report-header">
+            <div
+              class="report-icon"
+              style="
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                color: white;
+              "
+            >
+              ☀️
+            </div>
+            <div class="report-date">March 5, 2026</div>
+          </div>
+          <h3 class="report-title">Vitamin D (25-OH)</h3>
+          <p style="color: var(--text-medium); margin-bottom: 1rem">
+            Vitamin D3 levels for bone health and immunity assessment
+          </p>
+          <div class="metric-status status-warning">⚠ Below Optimal</div>
+          <div class="report-details">
+            <div class="report-detail-item">
+              <div class="report-detail-label">Vitamin D</div>
+              <div class="report-detail-value">22 ng/mL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">Reference Range</div>
+              <div class="report-detail-value">30-100 ng/mL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">Status</div>
+              <div class="report-detail-value">Insufficient</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blood Sugar - Fasting -->
+        <div
+          class="report-card"
+          data-category="diabetes"
+          onclick="viewReport('fbs-feb')"
+        >
+          <div class="report-header">
+            <div
+              class="report-icon"
+              style="
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                color: white;
+              "
+            >
+              🩺
+            </div>
+            <div class="report-date">February 28, 2026</div>
+          </div>
+          <h3 class="report-title">Fasting Blood Sugar (FBS)</h3>
+          <p style="color: var(--text-medium); margin-bottom: 1rem">
+            Blood glucose measurement after 8-hour fasting period
+          </p>
+          <div class="metric-status status-normal">✓ Normal Range</div>
+          <div class="report-details">
+            <div class="report-detail-item">
+              <div class="report-detail-label">Glucose Level</div>
+              <div class="report-detail-value">92 mg/dL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">Reference</div>
+              <div class="report-detail-value">70-100 mg/dL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">Status</div>
+              <div class="report-detail-value">Normal</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lipid Profile -->
+        <div
+          class="report-card"
+          data-category="blood"
+          onclick="viewReport('lipid-feb')"
+        >
+          <div class="report-header">
+            <div
+              class="report-icon"
+              style="
+                background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+                color: white;
+              "
+            >
+              ❤️
+            </div>
+            <div class="report-date">February 20, 2026</div>
+          </div>
+          <h3 class="report-title">Lipid Profile</h3>
+          <p style="color: var(--text-medium); margin-bottom: 1rem">
+            Cholesterol and triglyceride levels for cardiovascular health
+          </p>
+          <div class="metric-status status-normal">✓ Healthy Levels</div>
+          <div class="report-details">
+            <div class="report-detail-item">
+              <div class="report-detail-label">Total Cholesterol</div>
+              <div class="report-detail-value">178 mg/dL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">HDL</div>
+              <div class="report-detail-value">55 mg/dL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">LDL</div>
+              <div class="report-detail-value">98 mg/dL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vitamin B12 -->
+        <div
+          class="report-card"
+          data-category="vitamins"
+          onclick="viewReport('vitamin-b12')"
+        >
+          <div class="report-header">
+            <div
+              class="report-icon"
+              style="
+                background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+                color: white;
+              "
+            >
+              💊
+            </div>
+            <div class="report-date">February 15, 2026</div>
+          </div>
+          <h3 class="report-title">Vitamin B12</h3>
+          <p style="color: var(--text-medium); margin-bottom: 1rem">
+            B12 levels for nerve function and red blood cell production
+          </p>
+          <div class="metric-status status-normal">✓ Adequate Levels</div>
+          <div class="report-details">
+            <div class="report-detail-item">
+              <div class="report-detail-label">B12 Level</div>
+              <div class="report-detail-value">485 pg/mL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">Reference</div>
+              <div class="report-detail-value">200-900 pg/mL</div>
+            </div>
+            <div class="report-detail-item">
+              <div class="report-detail-label">Status</div>
+              <div class="report-detail-value">Normal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div
+        style="
+          text-align: center;
+          margin-top: 3rem;
+          padding: 2rem;
+          background: var(--bg-light);
+          border-radius: 16px;
+        "
+      >
+        <h3 style="color: var(--text-dark); margin-bottom: 1rem">
+          Need More Tests?
+        </h3>
+        <p style="color: var(--text-medium); margin-bottom: 1.5rem">
+          Book diagnostic tests with home sample collection
+        </p>
+        <a href="book-test.html" class="btn btn-primary btn-large"
+          >Book Diagnostic Test</a
+        >
+      </div>
+    </div>
+
+    <!-- Floating AI Chat Button -->
+    <div
+      class="floating-ai-chat"
+      onclick="
+        alert(
+          'AI Chat feature - Please visit the Dashboard to use the full chat interface',
+        )
+      "
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+        <circle cx="9" cy="10" r="1" fill="currentColor" />
+        <circle cx="15" cy="10" r="1" fill="currentColor" />
+        <path d="M9 14s1 1 3 1 3-1 3-1" />
+      </svg>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      function filterReports(category) {
+        const tabs = document.querySelectorAll(".tab");
+        const reports = document.querySelectorAll(".report-card");
+
+        tabs.forEach((tab) => tab.classList.remove("active"));
+        event.target.classList.add("active");
+
+        reports.forEach((report) => {
+          if (category === "all" || report.dataset.category === category) {
+            report.style.display = "block";
+          } else {
+            report.style.display = "none";
+          }
+        });
+      }
+
+      function viewReport(reportId) {
+        alert(
+          `📄 Viewing Full Report\n\nReport ID: ${reportId}\n\nThis would open a detailed PDF report with:\n• Complete test results\n• Doctor's notes & interpretation\n• Reference ranges\n• Diagnostic graphs\n• Historical comparison\n\n(Full report viewer coming soon!)`,
+        );
+      }
+    </script>
+  </body>
+</html>

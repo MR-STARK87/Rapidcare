@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Your Nurse - RapidCare</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">RapidCare</a>
+        <ul class="nav-links">
+          <li><a href="patient-dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Tracking Container -->
+    <div class="dashboard-container">
+      <div class="section-header" style="text-align: center">
+        <h1>Your Nurse is on the Way! 🚑</h1>
+        <p>Real-time tracking of your healthcare professional</p>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div class="progress-indicator">
+        <div class="progress-step completed">
+          <div class="progress-circle">✓</div>
+          <p>Request Accepted</p>
+        </div>
+        <div class="progress-step active">
+          <div class="progress-circle">🚗</div>
+          <p>Nurse En Route</p>
+        </div>
+        <div class="progress-step">
+          <div class="progress-circle">3</div>
+          <p>Arrival Soon</p>
+        </div>
+      </div>
+
+      <!-- Map Placeholder -->
+      <div class="map-placeholder">
+        📍 Map Area
+        <br />
+        <span style="font-size: 1rem; color: #999"
+          >Live tracking map would display here</span
+        >
+      </div>
+
+      <!-- Nurse Information Card -->
+      <div class="nurse-info">
+        <div class="nurse-header">
+          <div class="nurse-avatar">👩‍⚕️</div>
+          <div class="nurse-details">
+            <h3>Nurse Priya Singh</h3>
+            <p style="color: #666; margin: 0">Registered Nurse</p>
+            <div class="nurse-rating">⭐ 4.8 (250+ visits)</div>
+          </div>
+        </div>
+
+        <div class="nurse-stats">
+          <div class="stat-item">
+            <strong>12 min</strong>
+            <p style="color: #666; margin: 0">Estimated Arrival</p>
+          </div>
+          <div class="stat-item">
+            <strong>2.3 km</strong>
+            <p style="color: #666; margin: 0">Distance Away</p>
+          </div>
+          <div class="stat-item">
+            <strong>8+ years</strong>
+            <p style="color: #666; margin: 0">Experience</p>
+          </div>
+          <div class="stat-item">
+            <strong>Certified</strong>
+            <p style="color: #666; margin: 0">RN License</p>
+          </div>
+        </div>
+
+        <!-- Qualifications -->
+        <div style="margin-bottom: 1.5rem">
+          <h4 style="margin-bottom: 0.5rem">Qualifications & Expertise</h4>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
+            <span class="badge badge-info">Emergency Care</span>
+            <span class="badge badge-info">Wound Care</span>
+            <span class="badge badge-info">IV Therapy</span>
+            <span class="badge badge-info">Elderly Care</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 1rem">
+          <button class="btn btn-primary" style="flex: 1" onclick="callNurse()">
+            📞 Call Nurse
+          </button>
+          <button
+            class="btn btn-outline"
+            style="flex: 1"
+            onclick="cancelRequest()"
+          >
+            ❌ Cancel Request
+          </button>
+        </div>
+      </div>
+
+      <!-- Additional Information -->
+      <div class="card">
+        <h3 style="margin-bottom: 1rem">What to Expect</h3>
+        <ul style="padding-left: 1.5rem; color: #666">
+          <li style="margin-bottom: 0.5rem">
+            Nurse Priya has been briefed about your medical situation
+          </li>
+          <li style="margin-bottom: 0.5rem">
+            She is carrying all necessary medical supplies and equipment
+          </li>
+          <li style="margin-bottom: 0.5rem">
+            You will receive a notification when she arrives at your location
+          </li>
+          <li style="margin-bottom: 0.5rem">
+            Average visit duration: 30-45 minutes
+          </li>
+          <li style="margin-bottom: 0.5rem">
+            Payment will be processed after the visit is completed
+          </li>
+        </ul>
+      </div>
+
+      <!-- Emergency Contact Box -->
+      <div class="info-box">
+        <p>
+          <strong>⚠️ Emergency:</strong> If this is a life-threatening
+          emergency, please call 911 immediately. RapidCare is for non-critical
+          medical situations only.
+        </p>
+      </div>
+    </div>
+
+    <!-- Floating AI Chat Button -->
+    <div class="floating-ai-chat" onclick="openAIChat()">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+        <circle cx="9" cy="10" r="1" fill="currentColor" />
+        <circle cx="15" cy="10" r="1" fill="currentColor" />
+        <path d="M9 14s1 1 3 1 3-1 3-1" />
+      </svg>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Simulate progress updates
+      let currentStep = 2;
+
+      function updateProgress() {
+        if (currentStep < 3) {
+          setTimeout(function () {
+            currentStep++;
+            const steps = document.querySelectorAll(".progress-step");
+            if (steps[currentStep - 1]) {
+              steps[currentStep - 1].classList.add("active");
+              if (currentStep > 1) {
+                steps[currentStep - 2].classList.remove("active");
+                steps[currentStep - 2].classList.add("completed");
+              }
+            }
+
+            // Update ETA
+            const etaElement = document.querySelector(".stat-item strong");
+            if (currentStep === 3) {
+              etaElement.textContent = "2 min";
+              document.querySelector(".section-header h1").textContent =
+                "Nurse Arriving Soon! 🎉";
+            }
+
+            updateProgress();
+          }, 5000);
+        }
+      }
+
+      // Start progress simulation
+      updateProgress();
+
+      // Call nurse function
+      function callNurse() {
+        alert(
+          "Calling Nurse Priya Singh...\n\nPhone: +91 98765 43210\n\nNote: This is a demo. In production, this would initiate an actual call.",
+        );
+      }
+
+      // Cancel request function
+      function cancelRequest() {
+        if (
+          confirm(
+            "Are you sure you want to cancel this request?\n\nA cancellation fee may apply if the nurse is already en route.",
+          )
+        ) {
+          alert("Request cancelled. You will be redirected to the dashboard.");
+          setTimeout(function () {
+            window.location.href = "patient-dashboard.html";
+          }, 1000);
+        }
+      }
+
+      function openAIChat() {
+        alert(
+          '🤖 AI Health Assistant\n\n"Hello! I\'m your AI health assistant. How can I help you today?\n\n• Book diagnostic tests\n• Understand test results\n• Get health recommendations\n• Find nearby nurses\n• Answer medical questions"\n\n(AI Chat feature coming soon!)',
+        );
+      }
+    </script>
+  </body>
+</html>
